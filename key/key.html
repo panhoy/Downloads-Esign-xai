@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Restricted</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Share Tech Mono', monospace;
+      background-color: black;
+      color: #00ff00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.9);
+      padding: 20px;
+      border: 2px solid #00ff00;
+      box-shadow: 0 0 20px #00ff00;
+      border-radius: 10px;
+      width: 350px;
+    }
+
+    h2 {
+      text-shadow: 0 0 5px #00ff00;
+    }
+
+    .btn {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      background: black;
+      color: #00ff00;
+      border: 2px solid #00ff00;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #00ff00;
+      color: black;
+      text-shadow: 0 0 10px black;
+    }
+
+    .progress-bar {
+      margin: 15px 0;
+      background-color: #333;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress {
+      width: 0%;
+      height: 100%;
+      background-color: #00ff00;
+      transition: width 0.5s;
+    }
+
+    .unlock-btn {
+      background: black;
+      color: #555;
+      border: 2px solid #555;
+      cursor: not-allowed;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .unlock-btn.enabled {
+      border-color: #00ff00;
+      color: #00ff00;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ACCESS RESTRICTED</h2>
+    <p>Engage security protocols to proceed.</p>
+    <a href="#" class="btn" id="telegramButton">Join Telegram</a>
+    <a href="#" class="btn" id="youtubeButton">Subscribe on YouTube</a>
+
+    <div class="progress-bar">
+      <div id="progress" class="progress"></div>
+    </div>
+    <button id="unlockButton" class="unlock-btn" disabled>ACCESS DENIED</button>
+  </div>
+
+  <script>
+    const youtubeButton = document.getElementById('youtubeButton');
+    const telegramButton = document.getElementById('telegramButton');
+    const unlockButton = document.getElementById('unlockButton');
+    const progressBar = document.getElementById('progress');
+
+    let isYouTubeClicked = false;
+    let isTelegramClicked = false;
+
+    youtubeButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      isYouTubeClicked = true;
+      window.open('https://youtube.com/@xai-qq', '_blank');
+      checkProgress();
+    });
+
+    telegramButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      isTelegramClicked = true;
+      window.open('https://t.me/nhoy200', '_blank');
+      checkProgress();
+    });
+
+    function checkProgress() {
+      if (isYouTubeClicked && isTelegramClicked) {
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += 2;
+          progressBar.style.width = progress + '%';
+
+          if (progress >= 100) {
+            clearInterval(interval);
+            unlockButton.disabled = false;
+            unlockButton.classList.add('enabled');
+            unlockButton.textContent = 'ACCESS GRANTED';
+          }
+        }, 100);
+      }
+    }
+
+    unlockButton.addEventListener('click', function () {
+      if (!this.disabled) {
+        window.location.href = 'https://whysoooofurious.netlify.app/files/configurationprofiles/madNS-CP.mobileconfig';
+      }
+    });
+  </script>
+</body>
+</html>
